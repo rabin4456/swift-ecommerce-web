@@ -13,4 +13,3 @@ export const routes = createBrowserRouter([
     element: <Home />,
   },
 ]);
-<Link to='/home' />;
