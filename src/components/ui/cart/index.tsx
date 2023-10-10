@@ -1,4 +1,5 @@
 import { CheckIcon, ClockIcon } from "@heroicons/react/20/solid";
+import Button from "../button";
 
 const products = [
   {
@@ -114,11 +115,8 @@ const Cart = () => {
                 Shipping and taxes will be calculated at checkout.
               </p>
             </div>
-
-            <div style={{ marginTop: 20 }}>
-              <button type='submit' className='CheckoutButton'>
-                Checkout
-              </button>
+            <div style={{ marginTop: 15 }}>
+              <Button label='Checkout' buttonType='secondary' />
             </div>
           </section>
         </form>

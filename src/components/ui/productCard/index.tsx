@@ -1,9 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../../api";
+import Button from "../button";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_PRODUCTS_TO_CART } from "../../../features/products/productsSlice";
 
 const ProductCard = () => {
   const { data } = useQuery(["allProducts"], getProducts);
-  console.log(data, "===data=====");
+  const product = useSelector((state) => state);
+  const dispatch = useDispatch();
+  console.log(data, "===products==");
+  console.log(product, "===product==");
+
   return (
     <div className=''>
       <div className='productCartContainer'>
@@ -27,22 +34,43 @@ const ProductCard = () => {
                 <div className='flex-container'>
                   <p className='productDescription'>{product?.category}</p>
                   <p className='text'>{product?.stock} pieces</p>
-                  <p className='productDiscountDescription'>
-                    {product?.discountPercentage}% discount
-                  </p>
+
+                  <div style={{ width: "100%" }}>
+                    <Button
+                      label='Add to cart'
+                      onClick={() =>
+                        dispatch(ADD_PRODUCTS_TO_CART(product))
+                      }
+                    />
+                  </div>
+
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <div style={{ display: "flex", columnGap: 12 }}>
-                      {/* <p className='textCrossBold'>${product?.price}</p> */}
+                    <div
+                      style={{
+                        display: "flex",
+                        columnGap: 12,
+                        alignItems: "center",
+                      }}
+                    >
                       <p className='textBold'>${product?.price}</p>
+                      <p className='productDiscountDescription'>
+                        ({product?.discountPercentage}% off)
+                      </p>
                     </div>
-                    <div style={{ display: "flex", columnGap: 5 }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        columnGap: 5,
+                        alignItems: "center",
+                      }}
+                    >
                       <span
                         className='fa fa-star'
                         style={{ color: "orange" }}
                       />
-                      <p className='productRating '>{product?.rating}</p>
+                      <p className='productRating'>{product?.rating}</p>
                     </div>
                   </div>
                 </div>

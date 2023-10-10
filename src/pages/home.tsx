@@ -3,6 +3,7 @@ import NavigationBar from "../components/ui/navigationBar";
 import ProductCard from "../components/ui/productCard";
 import Cart from "../components/ui/cart";
 import { useState } from "react";
+import Button from "../components/ui/button";
 
 const Home = () => {
   const [showCart, setShowCart] = useState(false);
@@ -28,6 +29,8 @@ const Home = () => {
         <ShoppingCartIcon className='cartIcon' />
       </div>
       {showCart && <Cart />}
+
+      <Button label='submit' />
     </div>
   );
 };
