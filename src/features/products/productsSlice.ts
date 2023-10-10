@@ -16,9 +16,13 @@ export const ProductSlice = createSlice({
       state.cart.push(action?.payload);
       localStorage.setItem("cartItems", JSON.stringify(state.cart));
     },
+    ADD_PERSISITED_DATA: (state, action: PayloadAction<any>) => {
+      state.cart.push(...action.payload);
+    },
   },
 });
 
-export const { ADD_PRODUCTS_TO_CART } = ProductSlice.actions;
+export const { ADD_PRODUCTS_TO_CART, ADD_PERSISITED_DATA } =
+  ProductSlice.actions;
 
 export default ProductSlice.reducer;

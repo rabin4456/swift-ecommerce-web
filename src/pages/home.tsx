@@ -2,11 +2,21 @@ import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 import NavigationBar from "../components/ui/navigationBar";
 import ProductCard from "../components/ui/productCard";
 import Cart from "../components/ui/cart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/ui/button";
+import { ADD_PERSISITED_DATA } from "../features/products/productsSlice";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
   const [showCart, setShowCart] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let data = localStorage.getItem("cartItems");
+    if (data) {
+      dispatch(ADD_PERSISITED_DATA(JSON.parse(data)));
+    }
+  }, []);
 
   const closeCart = () => {
     setShowCart(false);
@@ -29,8 +39,6 @@ const Home = () => {
         <ShoppingCartIcon className='cartIcon' />
       </div>
       {showCart && <Cart />}
-
-      <Button label='submit' />
     </div>
   );
 };
