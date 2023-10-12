@@ -1,46 +1,43 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../../api";
 import Button from "../button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ADD_PRODUCTS_TO_CART } from "../../../features/products/productsSlice";
+import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 
 const ProductCard = () => {
   const { data } = useQuery(["allProducts"], getProducts);
-  const product = useSelector((state) => state);
   const dispatch = useDispatch();
-  console.log(data, "===products==");
-  console.log(product, "===product==");
 
   return (
     <div className=''>
       <div className='productCartContainer'>
-        <h2 className='sr-only'>Products</h2>
+        <h2 className='header'>Products</h2>
 
         <div className='productContainer'>
-          {data?.products.map((product: any) => (
+          {data?.products.map((product: Cart) => (
             <div key={product.id} className='ProductItem'>
               <div className='imgContainer'>
                 <img
-                  src={product.images[0]}
-                  alt={product.title}
+                  src={product?.images[0]}
+                  alt={product?.title}
                   className='image'
                 />
               </div>
               <div className='detailContainer'>
                 <h3 className='productName'>{product?.title}</h3>
-                <p className='productDescription'>{product.brand}</p>
+                <p className='productDescription'>{product?.brand}</p>
 
                 <p className='productDescription'>{product?.description}</p>
                 <div className='flex-container'>
                   <p className='productDescription'>{product?.category}</p>
                   <p className='text'>{product?.stock} pieces</p>
 
-                  <div style={{ width: "100%" }}>
+                  <div className="addTocartContainer">
                     <Button
                       label='Add to cart'
-                      onClick={() =>
-                        dispatch(ADD_PRODUCTS_TO_CART(product))
-                      }
+                      icon={<ShoppingCartIcon className='cartIcon' />}
+                      onClick={() => dispatch(ADD_PRODUCTS_TO_CART(product))}
                     />
                   </div>
 

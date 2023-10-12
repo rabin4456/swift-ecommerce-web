@@ -34,6 +34,7 @@ export default function Button({
       type={type}
       className={buttonTypeClass}
       {...props}
+      style={{display:'flex' ,gap:8}}
     >
       <>
         {label && label}
