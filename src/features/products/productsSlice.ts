@@ -14,7 +14,7 @@ export const ProductSlice = createSlice({
   reducers: {
     ADD_PRODUCTS_TO_CART: (state, action: PayloadAction<Cart>) => {
       const item: any = state.cart.find(
-        (el, indx) => el.id === action.payload.id
+        (el) => el.id === action.payload.id
       );
       if (item) {
         toast.warning("Product already in cart.");
