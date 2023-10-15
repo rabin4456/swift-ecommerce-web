@@ -4,6 +4,7 @@ import Button from "../button";
 import { useDispatch } from "react-redux";
 import { ADD_PRODUCTS_TO_CART } from "../../../features/products/productsSlice";
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
+import FallbackImage from "../../../assets/placeholder.jpg";
 
 const ProductCard = () => {
   const { data } = useQuery(["allProducts"], getProducts);
@@ -19,7 +20,7 @@ const ProductCard = () => {
             <div key={product.id} className='ProductItem'>
               <div className='imgContainer'>
                 <img
-                  src={product?.images[0]}
+                  src={product?.images[0] || FallbackImage}
                   alt={product?.title}
                   className='image'
                 />
@@ -33,7 +34,7 @@ const ProductCard = () => {
                   <p className='productDescription'>{product?.category}</p>
                   <p className='text'>{product?.stock} pieces</p>
 
-                  <div className="addTocartContainer">
+                  <div className='addTocartContainer'>
                     <Button
                       label='Add to cart'
                       icon={<ShoppingCartIcon className='cartIcon' />}
